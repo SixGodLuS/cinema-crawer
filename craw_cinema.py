@@ -1,4 +1,5 @@
 import requests
+import json
 from bs4 import BeautifulSoup
 
 def crawCinema():
@@ -14,6 +15,9 @@ def crawCinema():
         print('Error when request url=', url)
         return None
     soup = BeautifulSoup(text, 'lxml')
-    result = soup.find_all('div', id="cinemaListRegion")#.find_all('dl', class_="movieinfobox")
-    print(result)
+    test_json = json.load(soup)
+    print(test_json)
+    #print(soup)
+    result = soup.find_all('script', type="text/javascript")
+    #print(result)
 crawCinema()
