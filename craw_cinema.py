@@ -15,9 +15,13 @@ def crawCinema():
         print('Error when request url=', url)
         return None
     soup = BeautifulSoup(text, 'lxml')
-    test_json = json.load(soup)
-    print(test_json)
+    #test_json = json.load(soup)
+    #print(test_json)
     #print(soup)
     result = soup.find_all('script', type="text/javascript")
-    #print(result)
+    #for res in result:
+        #print(res ,'\n')
+    print(result[4])
+    test_json = json.load(result[4])
+    print(test_json)
 crawCinema()
