@@ -44,7 +44,7 @@ def crawCinema(i):
         print('Error when request url=', url)
         return None
     #soup = BeautifulSoup(text, 'lxml')
-    current_Date = datetime.now() - timedelta(days=abs(i))
+    current_Date = datetime.now() + timedelta(days=i)
     print(current_Date.strftime('%Y-%m-%d'))
     test_json = json.loads(text)
     for js in test_json['data4']:
@@ -67,8 +67,24 @@ def crawCinema(i):
     #test_json = json.load(result[4])
     #print(test_json)
 def getCrawedMovieSceneDate():
-    date1 = cursor.execute("select * from movie_scene")
-    print((date1))
+    cursor.execute("select * from movie_scene")
+    data1 = cursor.fetchall()
+    #print(data1)
+    leastDate = int(data1[0][2])
+    for da in data1:
+        if int(da[2]) >leastDate:
+            leastDate = int(da[2])
+    currentDate = str2date(datetime.now().strftime('%Y-%m-%d'))
+    return (leastDate - int(currentDate))
+days = getCrawedMovieSceneDate()
+if days >= 2:
+    crawCinema(2)
+elif days <= 0:
+    for i in range(0, 3):
+        crawCinema(i)
+else:
+    for i in range(days, 3):
+        crawCinema(i)
 #for i in range(0,3):
     #crawCinema(i)
 getCrawedMovieSceneDate()
