@@ -3,7 +3,7 @@ import lxml
 from bs4 import BeautifulSoup
 
 def crawlCityCinema():
-    url = 'http://theater.mtime.com/China_Anhui_Province_Huangshan_Shexian/4579/info.html'
+    url = 'http://theater.mtime.com/China_Fujian_Province_Fuqing/6124/info.html'
     headers = {
         'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.116 Safari/537.36'
     }
@@ -11,13 +11,20 @@ def crawlCityCinema():
     print("Crawling city cinema ...")
     try:
         print('Requesting url=', url)
-        text = requests.get(url, headers=headers, timeout=10).text
+        text = requests.get(url, headers=headers, timeout=20).text
     except Exception as e:
         print('Error when request url=', url)
         print(e)
         return None
     soup = BeautifulSoup(text, "lxml")
-    result = soup.find_all('table', class_='lovetable')
-    print(result[0])
-
+    cinemaInner = soup.find('table', class_='lovetable').find_all('p')
+    cinemacinemaPhoneTimeAdd = soup.find('div', class_='ci_title').find_all('p')
+    cimenaRequept = soup.find('div', class_='ci_mon').find_all('dd')
+    #print(cinemaInner[0].get_text().split()[0])
+    #print(cinemaInner[1].get_text().split()[0])
+    #print(cinemacinemaPhoneTimeAdd[1].get_text())
+    #print(cinemacinemaPhoneTimeAdd)
+    #print(cimenaRequept)
+    print(cinemacinemaPhoneTimeAdd[1].get_text().split())
+    #print(cinemaInner[0].get_text()[-2:])
 crawlCityCinema()

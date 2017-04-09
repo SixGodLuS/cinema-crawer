@@ -59,8 +59,8 @@ def main():
         for fl in flashList:
             if fl['id'] == fla['id']:
                 fla['stringid'] = fl['stringid']
-    for flashDict in flashList2:
-        flashCityMsg(flashDict)
+    #for flashDict in flashList2:
+        #flashCityMsg(flashDict)
     cursor.close()
     conn.close()
 if __name__ == '__main__':
