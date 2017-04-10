@@ -19,12 +19,15 @@ def crawlCityCinema():
     soup = BeautifulSoup(text, "lxml")
     cinemaInner = soup.find('table', class_='lovetable').find_all('p')
     cinemacinemaPhoneTimeAdd = soup.find('div', class_='ci_title').find_all('p')
-    cimenaRequept = soup.find('div', class_='ci_mon').find_all('dd')
+    cimenaRequept = soup.find('div', class_='ci_mon').find_all('p')
     #print(cinemaInner[0].get_text().split()[0])
     #print(cinemaInner[1].get_text().split()[0])
     #print(cinemacinemaPhoneTimeAdd[1].get_text())
     #print(cinemacinemaPhoneTimeAdd)
+    for p in cimenaRequept:
+        if p.find('b').get_text() == '可停车：':
+            print(p.find('span').get_text().rstrip().lstrip())
     #print(cimenaRequept)
-    print(cinemacinemaPhoneTimeAdd[1].get_text().split())
+    #print(cinemacinemaPhoneTimeAdd[1].get_text().split())
     #print(cinemaInner[0].get_text()[-2:])
 crawlCityCinema()
